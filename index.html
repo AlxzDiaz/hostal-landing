@@ -13,17 +13,20 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=1200&h=630&q=70">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
-  <!-- Tipografías: Playfair Display (títulos, estilo revista de viajes) + Plus Jakarta Sans (texto) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- Tipografías alojadas aquí (sin ir a Google): el título se pinta antes -->
+  <link rel="preload" href="fonts/g/playfairdisplay-v40-nufid-vyszvivyub-rj3ij-anpxdtzyga-woff2.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/g/playfairdisplay-v40-nufkd-vyszvivyub-rj3ij-anpxdtnogkk7-woff.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fuentes.css">
 
   <!-- Librerías: Phosphor Icons (íconos) + AOS (animaciones al hacer scroll) -->
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="vendor/aos/aos.css">
 
+  <!-- Los scripts del final se piden ya: así llenan la página antes del primer pintado -->
+  <link rel="preload" href="vendor/aos/aos.js" as="script">
+  <link rel="preload" href="js/config.js" as="script">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="stylesheet" href="css/iconos.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -74,12 +77,12 @@
     <section class="hero" id="inicio">
       <div class="container hero__grid">
         <div class="hero__texto">
-          <div class="ratings" id="ratings"></div>
-          <h1 data-aos="fade-up">Descansa <em>fresco</em> en el corazón de la Amazonía</h1>
-          <p class="hero__sub" data-aos="fade-up" data-aos-delay="100">Habitaciones con aire acondicionado, piscina entre plantas y desayuno con frutas de la selva, a 3 cuadras de la Plaza de Armas. Elige tus fechas y reserva directo, sin comisiones.</p>
+          <div class="ratings" id="ratings"><a class="rating" href="#opiniones"> <span class="rating__g"><i class="ph-fill ph-google-logo" aria-hidden="true"></i></span> <strong>4.8</strong><span>/5 · 412 reseñas<span class="sr-only"> en Google</span></span></a><a class="rating" href="#opiniones"> <span class="rating__g"><i class="ph-fill ph-bed" aria-hidden="true"></i></span> <strong>9.1</strong><span>/10 · 268 reseñas<span class="sr-only"> en Booking.com</span></span></a></div>
+          <h1 class="entra">Descansa <em>fresco</em> en el corazón de la Amazonía</h1>
+          <p class="entra hero__sub" style="--retraso: 100ms">Habitaciones con aire acondicionado, piscina entre plantas y desayuno con frutas de la selva, a 3 cuadras de la Plaza de Armas. Elige tus fechas y reserva directo, sin comisiones.</p>
 
           <!-- Buscador de fechas -->
-          <form class="buscador" id="buscador" data-aos="fade-up" data-aos-delay="200" novalidate>
+          <form class="entra buscador" id="buscador" novalidate style="--retraso: 200ms">
             <label class="buscador__campo">
               <span><i class="ph ph-sign-in" aria-hidden="true"></i>Llegada</span>
               <input type="date" data-fecha="llegada" required>
@@ -102,8 +105,8 @@
             <p class="buscador__resumen" data-resumen-fechas></p>
           </form>
 
-          <ul class="hero__trust" data-aos="fade-up" data-aos-delay="300">
-            <li class="estado"><span id="estado"></span></li>
+          <ul class="entra hero__trust" style="--retraso: 300ms">
+            <li class="estado"><span id="estado">Recepción abierta las 24 horas</span></li>
             <li><i class="ph ph-snowflake" aria-hidden="true"></i>Aire acondicionado</li>
             <li><i class="ph ph-airplane-landing" aria-hidden="true"></i>Recojo del aeropuerto</li>
           </ul>
@@ -112,7 +115,9 @@
         <div class="hero__visual" data-aos="zoom-in" data-aos-delay="150">
           <!-- Fotos de portada: cámbialas por fotos reales del hostal -->
           <figure class="hero__foto hero__foto--principal">
-            <img src="https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=760&h=920&q=70"
+            <img src="https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=760&h=920&q=55"
+                 srcset="https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=420&h=508&q=55 420w, https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=600&h=726&q=55 600w, https://images.unsplash.com/photo-1506812428898-fe5a708f5359?auto=format&fit=crop&w=760&h=920&q=55 760w"
+                 sizes="(min-width: 1000px) 560px, 80vw"
                  data-fallback="images/habitaciones/instalacion.svg" alt="Piscina rodeada de plantas tropicales" width="560" height="680" fetchpriority="high">
           </figure>
           <figure class="hero__foto hero__foto--mini">
@@ -538,7 +543,7 @@
   <!-- ============ AVISO (toast) ============ -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="vendor/aos/aos.js"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
   <script src="js/demo-aviso.js"></script>
